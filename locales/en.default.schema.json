@@ -374,6 +374,13 @@
         },
         "sku": {
           "name": "SKU"
+        },
+        "free_shipping": {
+          "label": {
+            "name": "Add your text",
+            "default": "This item qualifies for FREE SHIPPING."
+          },
+          "icon": "Upload a shipping icon image"
         }
       },
       "header_1": {
