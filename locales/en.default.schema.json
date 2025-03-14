@@ -320,6 +320,13 @@
             "label": "Show message input"
           }
         },
+        "free_shipping": {
+          "label": {
+            "name": "Shipping Text",
+            "label":"This item qualifies for FREE SHIPPING."
+          },
+          "icon": "Shipping Icon"
+        },
         "share": {
           "name": "Share"
         },
