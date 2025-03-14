@@ -1,0 +1,578 @@
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Everything you need to know about our products and services"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Banner Text",
+      "default": "Can't find what you're looking for? Our team is here to help."
+    },
+    {
+      "type": "text",
+      "id": "contact_button_text",
+      "label": "Contact Button Text",
+      "default": "Contact Support"
+    },
+    {
+      "type": "url",
+      "id": "contact_button_link",
+      "label": "Contact Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_id",
+          "label": "Tab ID",
+          "default": "general"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "General Questions"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What brands do you carry?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "We partner with leading manufacturers to offer premium garage equipment including AMGO, Auxx Lift, NewAge, and more."
+        },
+        {
+          "type": "text",
+          "id": "tab",
+          "label": "Tab (must match a Tab ID)",
+          "default": "general"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 25,
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.faq-section {
+  background: white;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #666;
+}
+
+.tabs-wrapper {
+  background: white;
+  padding: 40px;
+  border: 1px solid #e5e5e5;
+}
+
+.tabs-nav-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e5e5e5;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-nav::before,
+.tabs-nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tabs-nav::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.tabs-nav::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.tabs-nav.show-left-indicator::before {
+  opacity: 1;
+}
+
+.tabs-nav.show-right-indicator::after {
+  opacity: 1;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  letter-spacing: 0.02em;
+  color: #666;
+}
+
+.tab-button.active {
+  color: #000000;
+  font-weight: 500;
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #000000;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.faq-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.faq-item {
+  border: 1px solid #e5e5e5;
+  transition: all 0.2s;
+}
+
+.faq-item:hover {
+  border-color: #000000;
+}
+
+.faq-question {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.faq-answer {
+  padding: 0 24px 20px;
+  line-height: 1.6;
+  display: none;
+}
+
+.faq-item.open {
+  background: white;
+  border-color: #000000;
+}
+
+.faq-item.open .faq-answer {
+  display: block;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s;
+  color: #000000;
+}
+
+.contact-banner {
+  margin-top: 32px;
+  padding: 24px;
+  background: white;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.contact-text {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #000000;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border: 1px solid #000000;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.contact-button:hover {
+  background: #333;
+  color: #fff;
+}
+
+.swipe-indicator {
+  display: none;
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #666;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.swipe-indicator svg {
+  width: 16px;
+  height: 16px;
+  animation: swipeIconAnimation 2s infinite;
+}
+
+@keyframes swipeIconAnimation {
+  0% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  100% { transform: translateX(-4px); }
+}
+
+@keyframes swipeHint {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-20px); }
+  75% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 28px;
+  }
+
+  .tabs-wrapper {
+    padding: 20px;
+  }
+
+  .tabs-nav {
+    padding: 8px 0;
+  }
+
+  .tabs-nav.animate-swipe {
+    animation: swipeHint 1.5s ease-in-out;
+  }
+
+  .tabs-nav::before,
+  .tabs-nav::after {
+    width: 32px;
+  }
+
+  .tab-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .swipe-indicator {
+    display: flex;
+  }
+
+  .faq-question {
+    padding: 16px 20px;
+  }
+
+  .faq-answer {
+    padding: 0 20px 16px;
+  }
+}
+</style>
+
+<section style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  " class="faq-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{{ section.settings.section_title | escape }}</h2>
+      <p class="section-subtitle">{{ section.settings.section_subtitle | escape }}</p>
+    </div>
+    <div class="tabs-wrapper">
+      <div class="tabs-nav-container">
+        <nav class="tabs-nav">
+          {% assign tab_blocks = section.blocks | where: "type", "tab" %}
+          {% if tab_blocks.size > 0 %}
+            {% for tab in tab_blocks %}
+              <button class="tab-button {% if forloop.first %}active{% endif %}" data-tab="{{ tab.settings.tab_id | escape }}">
+                {{ tab.settings.tab_label | escape }}
+              </button>
+            {% endfor %}
+          {% else %}
+            <button class="tab-button active" data-tab="default">General</button>
+          {% endif %}
+        </nav>
+        <div class="swipe-indicator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Swipe to see more
+        </div>
+      </div>
+
+      {% if tab_blocks.size > 0 %}
+        {% for tab in tab_blocks %}
+          <div class="tab-content {% if forloop.first %}active{% endif %}" id="{{ tab.settings.tab_id | escape }}">
+            <div class="faq-grid">
+              {% assign faq_blocks = section.blocks | where: "type", "faq_item" %}
+              {% for faq in faq_blocks %}
+                {% if faq.settings.tab == tab.settings.tab_id %}
+                  <div class="faq-item">
+                    <div class="faq-question">
+                      {{ faq.settings.question | escape }}
+                      <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                    <div class="faq-answer">
+                      {{ faq.settings.answer }}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="tab-content active" id="default">
+          <div class="faq-grid">
+            {% assign faq_blocks = section.blocks | where: "type", "faq_item" %}
+            {% for faq in faq_blocks %}
+              <div class="faq-item">
+                <div class="faq-question">
+                  {{ faq.settings.question | escape }}
+                  <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+                <div class="faq-answer">
+                  {{ faq.settings.answer }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="contact-banner">
+        <p class="contact-text">{{ section.settings.contact_text | escape }}</p>
+        <a href="{{ section.settings.contact_button_link }}" class="contact-button">
+          {{ section.settings.contact_button_text | escape }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const tabsNav = document.querySelector('.tabs-nav');
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const swipeIndicator = document.querySelector('.swipe-indicator');
+  
+  if (window.innerWidth <= 768) {
+    setTimeout(() => {
+      tabsNav.classList.add('animate-swipe');
+      setTimeout(() => {
+        tabsNav.classList.remove('animate-swipe');
+      }, 1500);
+    }, 1000);
+  }
+
+  function updateScrollIndicators() {
+    if (tabsNav.scrollWidth > tabsNav.clientWidth) {
+      const isAtStart = tabsNav.scrollLeft <= 0;
+      const isAtEnd = tabsNav.scrollLeft + tabsNav.clientWidth >= tabsNav.scrollWidth;
+      
+      tabsNav.classList.toggle('show-left-indicator', !isAtStart);
+      tabsNav.classList.toggle('show-right-indicator', !isAtEnd);
+      
+      if (window.innerWidth <= 768) {
+        swipeIndicator.style.display = 'flex';
+      } else {
+        swipeIndicator.style.display = 'none';
+      }
+    } else {
+      swipeIndicator.style.display = 'none';
+    }
+  }
+
+  updateScrollIndicators();
+  tabsNav.addEventListener('scroll', updateScrollIndicators);
+  window.addEventListener('resize', updateScrollIndicators);
+
+  tabButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      const tab = this.getAttribute('data-tab');
+      
+      tabButtons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      
+      tabContents.forEach(function(content) {
+        content.classList.remove('active');
+      });
+      
+      this.classList.add('active');
+      document.getElementById(tab).classList.add('active');
+      
+      // Ensure clicked tab is visible
+      const tabRect = this.getBoundingClientRect();
+      const navRect = tabsNav.getBoundingClientRect();
+      
+      if (tabRect.right > navRect.right) {
+        tabsNav.scrollBy({
+          left: tabRect.right - navRect.right + 16,
+          behavior: 'smooth'
+        });
+      } else if (tabRect.left < navRect.left) {
+        tabsNav.scrollBy({
+          left: tabRect.left - navRect.left - 16,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  document.querySelectorAll('.faq-question').forEach(function(question) {
+    question.addEventListener('click', function() {
+      const faqItem = this.parentElement;
+      
+      const openItems = document.querySelectorAll('.faq-item.open');
+      openItems.forEach(function(item) {
+        if (item !== faqItem) {
+          item.classList.remove('open');
+        }
+      });
+      
+      faqItem.classList.toggle('open');
+    });
+  });
+
+  // Add touch scroll momentum for better mobile experience
+  let isScrolling = false;
+  let startX;
+  let scrollLeft;
+
+  tabsNav.addEventListener('touchstart', (e) => {
+    isScrolling = true;
+    startX = e.touches[0].pageX - tabsNav.offsetLeft;
+    scrollLeft = tabsNav.scrollLeft;
+  });
+
+  tabsNav.addEventListener('touchmove', (e) => {
+    if (!isScrolling) return;
+    e.preventDefault();
+    const x = e.touches[0].pageX - tabsNav.offsetLeft;
+    const walk = (x - startX) * 2;
+    tabsNav.scrollLeft = scrollLeft - walk;
+  });
+
+  tabsNav.addEventListener('touchend', () => {
+    isScrolling = false;
+  });
+});
+{% endjavascript %}

@@ -1,0 +1,920 @@
+{% include 'shogun-content-handler' %}
+<!doctype html>
+<html class="no-js no-touch" lang="{{ request.locale.iso_code }}">
+{{ 'bold.css' | asset_url | stylesheet_tag }}
+<head>
+  <meta name="p:domain_verify" content="031833aa4067707ed6cc61d3de1f5130"/>      
+<link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://conf.config-security.com/' crossorigin />
+<link rel='preconnect dns-prefetch' href='https://whale.camera/' crossorigin />
+        
+  <meta name="robots" content="max-image-size:large">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com">
+    <link rel="preconnect" href="https://v.shopify.com">
+    <link rel="preconnect" href="https://cdn.shopifycloud.com">
+
+    <title>
+      {{- page_title -}}
+
+      {%- if current_tags -%}
+        {% capture cat_array %}{%- render 'advanced-tag-loop' -%}{% endcapture %}
+        {% assign cat_array = cat_array | split: '|' %}
+        {% assign title_tags = '' %}
+        {% assign meta_tags = current_tags | join: ', ' %}
+        {%- for tag in current_tags -%}
+          {% assign is_advanced_tag = false %}
+          {% assign cat = tag | split: '_' | first %}
+
+          {%- unless cat == tag -%}
+            {%- if cat_array contains cat -%}
+              {% assign is_advanced_tag = true %}
+              {% assign title_tags = title_tags | append: ', ' | append: tag | replace_first: '_', ': ' %}
+            {%- endif -%}
+          {%- endunless -%}
+
+          {%- unless is_advanced_tag -%}
+            {% assign title_tags = title_tags | append: ', ' | append: tag %}
+          {%- endunless -%}
+        {%- endfor -%}
+        {{ 'general.title.tags' | t: tags: title_tags | remove_first: ', ' }}
+      {%- endif -%}
+
+      {%- if current_page != 1 -%}
+        {{- 'general.title.page' | t: page: current_page -}}
+      {%- endif -%}
+
+      {%- unless page_title contains shop.name -%}
+        {{- 'general.title.shop' | t: shop: shop.name -}}
+      {%- endunless -%}
+    </title>
+
+    {% if page_description != blank %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'favicon' %}
+
+    {% if template contains 'collection' and current_tags %}
+      <meta name="robots" content="noindex" />
+      <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+    {% else %}
+      <link rel="canonical" href="{{ canonical_url | split: '?' | first }}" />
+    {% endif %}
+
+    {% if template contains 'search' %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+
+    {% if template contains 'cart' %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+
+    <meta name="viewport" content="width=device-width">
+
+    {% assign twitter_handle = settings.social_twitter | split: 'twitter.com/' | last %}
+    {%
+      render 'social-meta-tags',
+      twitter_handle: twitter_handle
+    %}
+
+<script>
+/* >> TriplePixel :: start*/
+window.TriplePixelData={TripleName:"27d498.myshopify.com",ver:"2.12",plat:"SHOPIFY",isHeadless:false},function(W,H,A,L,E,_,B,N){function O(U,T,P,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,P?(H.open("POST",U,!0),H.setRequestHeader("Content-Type","text/plain")):H.open("GET",U,!0),H.send(JSON.stringify(P||{})),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):P||(N[B]=R)):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1,P))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1,L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)};try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push({u:location.href,r:document.referrer,t:Date.now(),id:L()}),A.setItem(H+"U",JSON.stringify(E))}catch(e){}var i,m,p;A.getItem('"!nC`')||(_=A,A=N,A[H]||(E=A[H]=function(t,e,a){return void 0===a&&(a=[]),"State"==t?E.s:(W=L(),(E._q=E._q||[]).push([W,t,e].concat(a)),W)},E.s="Installed",E._q=[],E.ch=W,B="configSecurityConfModel",N[B]=1,O("https://conf.config-security.com/model",5),i=L(),m=A[atob("c2NyZWVu")],_.setItem("di_pmt_wt",i),p={id:i,action:"profile",avatar:_.getItem("auth-security_rand_salt_"),time:m[atob("d2lkdGg=")]+":"+m[atob("aGVpZ2h0")],host:A.TriplePixelData.TripleName,plat:A.TriplePixelData.plat,url:window.location.href,ref:document.referrer,ver:A.TriplePixelData.ver},O("https://api.config-security.com/event",5,p),O("https://whale.camera/live/dot.txt",5)))}}("","TriplePixel",localStorage);
+/* << TriplePixel :: end*/
+</script>
+  <script type="text/lazyload">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.dataset.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "jnxqf7nm56");
+</script>
+ 
+<!-- Google tag (gtag.js) -->
+<script async type="text/lazyload" src="https://www.googletagmanager.com/gtag/js?id=AW-11400101177"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11400101177');
+</script>
+  <script>
+    window.Store = window.Store || {};
+    window.Store.id = {{ shop.id }};
+  </script>
+
+    <!-- Start of MS Clarity -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "qgamzdsrju");
+    </script>
+    <!-- End of MS Clarity -->
+    
+    <link rel="preload" href="{{ settings.type_menu | font_url }}" as="font" crossorigin="anonymous">
+    <link rel="preload" as="style" href="{{ 'theme.css' | asset_url }}">
+    <link rel="preload" as="style" href="{{ 'custom.css' | asset_url }}">
+ 
+    {{ content_for_header }}
+{%- render 'bold-options-hybrid' -%}
+{%- render 'bold-common' -%}
+{% render 'sc-includes' %}
+{% if template == 'product' and product.metafields.inventory.ShappifyHidden or product.type contains '_HIDDEN_' %}<meta name='robots' content='noindex'>{% endif %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+    {% comment %}Inject theme-object begin{% endcomment %}
+    <script>
+      window.Theme = window.Theme || {};
+      window.Theme.version = '9.1.1';
+      window.Theme.name = 'Empire';
+      window.Theme.routes = {
+        "root_url": "{{ routes.root_url }}",
+        "account_url": "{{ routes.account_url }}",
+        "account_login_url": "{{ routes.account_login_url }}",
+        "account_logout_url": "{{ routes.account_logout_url }}",
+        "account_register_url": "{{ routes.account_register_url }}",
+        "account_addresses_url": "{{ routes.account_addresses_url }}",
+        "collections_url": "{{ routes.collections_url }}",
+        "all_products_collection_url": "{{ routes.all_products_collection_url }}",
+        "search_url": "{{ routes.search_url }}",
+        "predictive_search_url": "{{ routes.predictive_search_url }}",
+        "cart_url": "{{ routes.cart_url }}",
+        "cart_add_url": "{{ routes.cart_add_url }}",
+        "cart_change_url": "{{ routes.cart_change_url }}",
+        "cart_clear_url": "{{ routes.cart_clear_url }}",
+        "product_recommendations_url": "{{ routes.product_recommendations_url }}",
+      };
+    </script>
+    {% comment %}Inject theme-object end{% endcomment %}
+
+  {% render 'edt_p' %} 
+{% render 'gsf-conversion-pixels' %}
+
+  {% render 'shogun-head' %}
+
+   <style>
+     [data-optimizer="Shopify"]{display:none;}
+    @media (max-width: 768px) {
+    .product-form select {
+        width: 100% !important;
+    }
+    }
+  </style>
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('header.site-header')?.click();
+      console.log(11111111)
+    })
+ </script> 
+  {% if template == 'collection' %}
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+ {% endif %}
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+</head>
+
+  <body class="template-{{ template.name }} template-{{ template.suffix }}" data-instant-allow-query-string {% if settings.reduce_animations %}data-reduce-animations{% endif %}>
+   {% sections 'header-group' %}
+    <script>
+      document.documentElement.className=document.documentElement.className.replace(/\bno-js\b/,'js');
+      if(window.Shopify&&window.Shopify.designMode)document.documentElement.className+=' in-theme-editor';
+      if(('ontouchstart' in window)||window.DocumentTouch&&document instanceof DocumentTouch)document.documentElement.className=document.documentElement.className.replace(/\bno-touch\b/,'has-touch');
+    </script>
+
+    {% comment %}Inject icon-star-symbol begin{% endcomment %}
+    <svg
+      class="icon-star-reference"
+      aria-hidden="true"
+      focusable="false"
+      role="presentation"
+      xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="3 3 17 17" fill="none"
+    >
+      <symbol id="icon-star">
+        <rect class="icon-star-background" width="20" height="20" fill="currentColor"/>
+        <path d="M10 3L12.163 7.60778L17 8.35121L13.5 11.9359L14.326 17L10 14.6078L5.674 17L6.5 11.9359L3 8.35121L7.837 7.60778L10 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </symbol>
+      <clipPath id="icon-star-clip">
+        <path d="M10 3L12.163 7.60778L17 8.35121L13.5 11.9359L14.326 17L10 14.6078L5.674 17L6.5 11.9359L3 8.35121L7.837 7.60778L10 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </clipPath>
+    </svg>
+    {% comment %}Inject icon-star-symbol end{% endcomment %}
+
+
+    <a class="skip-to-main" href="#site-main">{{ 'general.accessibility.skip_to_content' | t }}</a>
+      {% if template == 'collection' %}
+  <script>
+     // setTimeout(function(){
+     //  var flickityElementspro = document.querySelectorAll('.tab-content.pro-tab');
+     //  if (flickityElementspro.length > 0) {
+     //    flickityElementspro.forEach(function (element) {
+     //      // Initialize Flickity for each tab-content
+     //      new Flickity(element, {
+     //        cellAlign: 'left',
+     //        wrapAround: false,
+     //        pageDots: false,
+     //        prevNextButtons: true,
+     //        draggable: false,
+     //        groupCells: 1,
+     //        draggable:true,
+     //        contain: true
+     //      });
+          
+          
+     //    });
+     //  }
+     // },3);
+
+  </script>
+{% endif %}
+  
+
+    <div style="--background-color: {{ settings.color_background }}">
+      {% 
+        render 'age-gate', 
+        id: 'page', 
+        sections: content_for_layout,
+      %}
+    </div>
+
+    <div class="intersection-target" data-header-intersection-target></div>
+    <div class="site-main-dimmer" data-site-main-dimmer></div>
+    <main id="site-main" class="site-main" aria-label="Main content" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {% comment %}
+      Below are various templates used in JavaScript
+    {% endcomment %}
+    <div style="display: none;" aria-hidden="true" data-templates>
+      {% comment %}Inject message-banner begin{% endcomment %}
+      <div
+        class="message-banner--container"
+        role="alert"
+        data-message-banner
+      >
+        <div class="message-banner--outer">
+          <div class="message-banner--inner" data-message-banner-content></div>
+      
+          <button
+            class="message-banner--close"
+            type="button"
+            aria-label="{{ 'general.accessibility.close' | t }}"
+            data-message-banner-close
+          >
+            {%- render 'icon-menu-close' -%}
+          </button>
+        </div>
+      </div>
+      {% comment %}Inject message-banner end{% endcomment %}
+
+      {% comment %}Inject atc-banner begin{% endcomment %}
+      <section class="atc-banner--container" role="log" data-atc-banner>
+        <div class="atc-banner--outer">
+          <div class="atc-banner--inner">
+            <div class="atc-banner--product">
+              <span class="atc-banner--product-title">
+                <span class="atc-banner--product-title--icon">
+                  {%
+                    render 'icon-library',
+                    id: 'icon-checkmark',
+                  %}
+                </span>
+                {{ 'add_to_cart_banner.general.product_added' | t }}
+              </span>
+      
+              <div class="atc--product">
+                <div class="atc--product-image" data-atc-banner-product-image>
+                  {{ 'image' | placeholder_svg_tag: 'placeholder--image' }}
+                </div>
+                <div class="atc--product-details">
+                  <span class="atc--product-details--title" data-atc-banner-product-title></span>
+                  <span class="atc--product-details--options" data-atc-banner-product-options></span>
+                  <span class="atc--product-details--price">
+                    <span class="atc--product-details--price-quantity" data-atc-banner-product-price-quantity></span>
+                    <span class="atc--product-details--price-value money" data-atc-banner-product-price-value></span>
+                    <span class="atc--product-details--price-discounted money" data-atc-banner-product-price-discounted></span>
+                    <span class="atc--product-details--unit-price hidden" data-atc-banner-unit-price>
+                      {{ 'product.general.price_per_unit_html' | t: total_quantity: '** total_quantity **', unit_price: '** unit_price **', unit_measure: '** unit_measure **' }}
+                    </span>
+                  </span>
+                  <ul class="discount-list" data-atc-banner-product-discounts>
+                    <li class="discount-list-item">
+                      {% render 'icon-library', id: 'icon-sale-tag' %}
+                      <span class="discount-title"></span>
+                      (-<span class="money discount-amount"></span>)
+                    </li>
+                  </ul>
+                  <span class="atc--line-item-subscriptions" data-atc-banner-product-subscription-title></span>
+                </div>
+              </div>
+            </div>
+      
+            <div class="atc-banner--cart">
+              <div class="atc-banner--cart-subtotal">
+                <span class="atc-subtotal--label">
+                  {{ 'add_to_cart_banner.general.sub_total' | t }}
+                </span>
+                <span class="atc-subtotal--price money" data-atc-banner-cart-subtotal></span>
+              </div>
+      
+              <footer class="atc-banner--cart-footer">
+                <a class="button-secondary atc-button--viewcart" href="{{ routes.cart_url }}" data-atc-banner-cart-button>
+                  {{ 'add_to_cart_banner.general.view_cart_html' | t: count: '<span></span>' }}
+                </a>
+                <form
+                  action="{{ routes.cart_url }}"
+                  method="post"
+                  aria-label="cart checkout"
+                >
+                  <button class="button-primary atc-button--checkout" type="submit" name="checkout">
+                    {% if settings.enable_checkout_lock_icon %}
+                      {% render 'icon-checkout-lock' %}
+                    {% endif %}
+                    <span>{{ 'add_to_cart_banner.general.checkout' | t }}</span>
+                  </button>
+                </form>
+              </footer>
+            </div>
+          </div>
+      
+          <button
+            class="atc-banner--close"
+            type="button"
+            aria-label="{{ 'general.accessibility.close' | t }}"
+            data-atc-banner-close
+          >
+            {%- render 'icon-menu-close' -%}
+          </button>
+        </div>
+      </section>
+      {% comment %}Inject atc-banner end{% endcomment %}
+
+    </div>
+
+    {% comment %}
+      Modal container, used on Collections, Password, and QuickShop
+    {% endcomment %}
+    {% comment %}Inject modal begin{% endcomment %}
+    <div class="modal" data-modal-container aria-label="modal window" data-trap-focus>
+      <div class="modal-inner" data-modal-inner>
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="{{ 'general.accessibility.close' | t }}"
+          data-modal-close
+        >
+          {% render 'icon-menu-close' %}
+        </button>
+        <div class="modal-content" data-modal-content></div>
+      </div>
+    </div>
+    
+    <div class="modal-1" data-modal-container-1 aria-label="modal window">
+      <div class="modal-inner" data-modal-inner>
+        <button
+          class="modal-close"
+          type="button"
+          aria-label="{{ 'general.accessibility.close' | t }}"
+          data-modal-1-close
+        >
+          {% render 'icon-menu-close' %}
+        </button>
+        <div class="modal-content" data-modal-content></div>
+      </div>
+    </div>
+    {% comment %}Inject modal end{% endcomment %}
+
+
+    {% comment %}
+      This is the PhotoSwipe dialog which needs to be in the base page
+    {% endcomment %}
+    {% comment %}Inject product-gallery-zoom begin{% endcomment %}
+    {% comment %} Root element of PhotoSwipe. Must have class pswp. {% endcomment %}
+    <div
+      class="pswp"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+      aria-label="{{ 'general.accessibility.product_zoom_dialog' | t }}"
+      data-photoswipe
+    >
+    
+      {% comment %} Background of PhotoSwipe.
+            It's a separate element as animating opacity is faster than rgba(). {% endcomment %}
+      <div class="pswp__bg"></div>
+    
+      {% comment %} Slides wrapper with overflow:hidden. {% endcomment %}
+      <div class="pswp__scroll-wrap">
+          {% comment %} Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. {% endcomment %}
+          <div class="pswp__container" aria-hidden="true">
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+          </div>
+    
+          {% comment %} Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. {% endcomment %}
+          <div class="pswp__ui pswp__ui--hidden">
+              <div class="pswp__top-bar">
+                  {% comment %}  Controls are self-explanatory. Order can be changed. {% endcomment %}
+                  <div class="pswp__counter"></div>
+                  <button class="pswp__button pswp__button--close" title="{{ 'general.accessibility.close' | t }}">
+                    <span tabindex="-1">
+                      {% render 'icon-library', id: 'icon-close' %}
+                    </span>
+                  </button>
+                  <button class="pswp__button pswp__button--share" title="Share"></button>
+                  <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                  <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+    
+                  {% comment %} Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR {% endcomment %}
+                  {% comment %} element will get class pswp__preloader--active when preloader is running {% endcomment %}
+                  <div class="pswp__preloader">
+                      <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                          <div class="pswp__preloader__donut"></div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+    
+              <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                  <div class="pswp__share-tooltip"></div>
+              </div>
+    
+              <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+              </button>
+              <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+              </button>
+    
+              <div class="pswp__caption">
+                  <div class="pswp__caption__center"></div>
+              </div>
+          </div>
+      </div>
+      <div class="product-zoom--thumbnails" data-photoswipe-thumbs>
+        <button
+          class="gallery-navigation--scroll-button scroll-left"
+          aria-label="Scroll thumbnails left"
+          data-gallery-scroll-button
+        >
+          {% render 'icon-chevron-down' %}
+        </button>
+        <button
+          class="gallery-navigation--scroll-button scroll-right"
+          aria-label="Scroll thumbnails right"
+          data-gallery-scroll-button
+        >
+          {% render 'icon-chevron-down' %}
+        </button>
+        <div class="product-zoom--thumb-scroller" data-photoswipe-thumb-scroller></div>
+      </div>
+    </div>
+    {% comment %}Inject product-gallery-zoom end{% endcomment %}
+
+
+    {% comment %}
+      Product compare drawer, shown when products are compared
+    {% endcomment %}
+    {% comment %}Inject template-allows-compare begin{% endcomment %}
+    {% assign template_allows_compare = settings.enable_product_compare %}
+    {% if template.name == 'cart' %}
+      {% assign template_allows_compare = false %}
+    {% elsif template.name == 'product' and template.suffix contains 'compare' %}
+      {% assign template_allows_compare = false %}
+    {% endif %}
+    {% comment %}Inject template-allows-compare end{% endcomment %}
+
+    {% if template_allows_compare %}
+      {% comment %}Inject product-compare-drawer begin{% endcomment %}
+      <div class="product-compare-drawer" data-product-compare-drawer>
+        <div class="product-compare-drawer__header" data-product-compare-drawer-header>
+          <h2 class="product-compare-drawer__title" data-product-compare-drawer-title>
+            {{ 'product_compare.drawer_title' | t }}
+          </h2>
+      
+          <p
+            class="product-compare-drawer__notification"
+            data-product-count-one="{{ 'product_compare.drawer_notification.one' | t }}"
+            data-product-count-other="{{ 'product_compare.drawer_notification.other' | t: count: '** count **' }}"
+            data-product-compare-drawer-notification
+          >
+            {{ 'product_compare.drawer_notification' | t: count }}
+          </p>
+      
+          <span class="product-compare-drawer__trigger">
+            {% render 'icon-chevron-down' %}
+          </span>
+        </div>
+      
+        <div class="product-compare-drawer__container">
+          <div class="product-compare-drawer__items" data-compare-drawer-items-container>
+            <template data-product-compare-drawer-item-template>
+              <div
+                class="
+                  product-compare-drawer__item
+                  imagestyle--{% if settings.product_grid_image_crop and settings.product_grid_image_style != 'natural' %}cropped-{% endif %}{{ settings.product_grid_image_style }}
+                "
+              >
+                <div class="product-compare-drawer__image">
+                  <figure class="productitem--image" data-product-compare-drawer-image></figure>
+                </div>
+                <a class="product-compare-drawer__item-title" data-product-compare-drawer-title></a>
+                <button class="product-compare-drawer__remove" data-product-compare-drawer-remove>
+                  {%
+                    render 'icon-library',
+                    id: 'icon-remove',
+                    icon_class: 'product-compare-drawer__remove-icon',
+                  %}
+                </button>
+              </div>
+            </template>
+      
+            {% for i in (1..3) %}
+              <div class="product-compare-drawer__item-placeholder" data-product-compare-drawer-item-placeholder>
+                <p class="product-compare-drawer__item-placeholder-text">
+                  {% if forloop.index == 1 %}
+                    {{ 'product_compare.drawer_notification_placeholder.first' | t }}
+                  {% elsif forloop.index == 2 %}
+                    {{ 'product_compare.drawer_notification_placeholder.second' | t }}
+                  {% elsif forloop.index == 3 %}
+                    {{ 'product_compare.drawer_notification_placeholder.third' | t }}
+                  {% endif %}
+                </p>
+              </div>
+            {% endfor %}
+          </div>
+      
+          <div class="product-compare-drawer__actions">
+            <a
+              class="
+                product-compare-drawer__link
+                button-primary
+                disabled
+              "
+              href="{{ routes.root_url }}"
+              data-product-compare-drawer-link
+              data-product-compare-drawer-link-text="{{ 'product_compare.compare' | t }}"
+            >
+              {{ 'product_compare.compare' | t }}
+            </a>
+      
+            <button class="product-compare-drawer__clear-all" data-product-compare-clear-all>
+              {{ 'product_compare.drawer_clear_all' | t }}
+            </button>
+          </div>
+        </div>
+      </div>
+      {% comment %}Inject product-compare-drawer end{% endcomment %}
+
+    {% endif %}
+
+    {% if settings.enable_product_compare %}
+      {% comment %}Inject product-compare-breadcrumb-data begin{% endcomment %}
+      {% assign compare_breadcrumb_title = nil %}
+      
+      {% case request.page_type %}
+        {% when 'product' %}
+          {% assign compare_breadcrumb_title = product.title %}
+        {% when 'collection' %}
+          {% assign compare_breadcrumb_title = collection.title %}
+        {% when 'index' %}
+          {% assign compare_breadcrumb_title = 'general.breadcrumbs.home' | t %}
+        {% when 'search' %}
+          {% assign compare_breadcrumb_title = 'general.accessibility.search' | t %}
+      {% endcase %}
+      
+      {% assign compare_breadcrumb_update = true %}
+      
+      {% if template.name == 'product' and template.suffix contains 'compare' %}
+        {% assign compare_breadcrumb_update = false %}
+      {% endif %}
+      
+      <script type="application/json" data-product-compare-breadcrumb-data>
+        {
+          "title": {{ compare_breadcrumb_title | json }},
+          "update": {{ compare_breadcrumb_update }}
+        }
+      </script>
+      {% comment %}Inject product-compare-breadcrumb-data end{% endcomment %}
+
+    {% endif %}
+
+    {%- if template contains 'customer' -%}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+      {{ 'customer_area.js' | shopify_asset_url | script_tag }}
+    {%- endif -%}
+
+    {% unless settings.reduce_animations %}
+      <script>
+        (
+          function () {
+            var classes = {
+              block: 'pxu-lia-block',
+              element: 'pxu-lia-element',
+            };
+
+            document
+              .querySelectorAll('[type="application/pxs-animation-mapping+json"]')
+              .forEach(function (mappingEl) {
+                const section = mappingEl.parentNode;
+                try {
+                  const mapping = JSON.parse(mappingEl.innerHTML);
+                  mapping.elements.forEach(function (elementSelector) {
+                    section
+                      .querySelectorAll(elementSelector)
+                      .forEach(function (element) { element.classList.add(classes.element); });
+                  });
+
+                  mapping.blocks.forEach(function (blockSelector) {
+                    section
+                      .querySelectorAll(blockSelector)
+                      .forEach(function (block) { block.classList.add(classes.block); });
+                  });
+                } catch (error) {
+                  console.warn('Unable to parse animation mapping', mappingEl, error);
+                }
+            });
+          }
+        )()
+      </script>
+    {% endunless %}
+
+    <script
+      src="{{ 'empire.js' | asset_url }}"
+      data-scripts
+      data-shopify-api-url="{{ 'api.jquery.js' | shopify_asset_url }}"
+      data-shopify-countries="/services/javascripts/countries.js"
+      data-shopify-common="{{ 'shopify_common.js' | shopify_asset_url }}"
+      data-shopify-cart="{{ 'jquery.cart.js' | asset_url }}"
+      data-pxu-polyfills="{{ 'polyfills.min.js' | asset_url }}"
+    >
+    </script>
+
+    {% render 'structured-data' %}
+
+    <script>
+    (function () {
+      function handleFirstTab(e) {
+        if (e.keyCode === 9) { // the "I am a keyboard user" key
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+    </script>
+
+    {% unless settings.reduce_animations %}
+      {{ 'ripple.css' | asset_url | stylesheet_tag }}
+    {% endunless %}
+
+    <script
+      src="{{ 'instantPage.min.js' | asset_url }}"
+      type="module"
+      defer
+    > 
+    </script>
+      <script src="//instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"></script>
+    
+<script async type="text/lazyload" src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" ></script>
+<script src="{{ 'custom.js' | asset_url }}?v=20240319"></script>
+ 
+<!-- BEGIN app: shopify://apps/klaviyo-email-marketing-sms/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
+<script async type="text/lazyload" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SzeZTW"></script>
+<script>!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
+<!-- END app -->
+
+
+
+  <!-- KMH Added to Cart Event Script -->
+  
+  {% if product %}
+  <script>
+  window.addEventListener('load', function() {
+
+  const productTabDataElements = document.querySelectorAll('.tab-content .flickity-slider .product-tab-data');
+
+        // Calculate the maximum height
+        let maxHeight = 0;
+        productTabDataElements.forEach(element => {
+          const elementHeight = element.offsetHeight;
+          if (elementHeight > maxHeight) {
+            maxHeight = elementHeight;
+          }
+        });
+        
+        productTabDataElements.forEach(element => {
+          element.style.height = `${maxHeight}px`;
+        });
+ 
+  var _learnq = window._learnq || [];
+  function addedToCart() {
+    fetch(`${window.location.origin}/cart.js`)
+    .then(res => res.clone().json().then(data => {
+      var cart = {
+        total_price: data.total_price/100,
+        $value: data.total_price/100,
+        total_discount: data.total_discount,
+        original_total_price: data.original_total_price/100,
+        items: data.items
+      }
+      if (item !== 'undefined') {
+        cart = Object.assign(cart, item)
+      }
+      if (klAjax) {
+          _learnq.push(['track', 'Added to Cart', cart]);
+          klAjax = false;
+        }
+    }))
+  };
+  (function (ns, fetch) {
+    ns.fetch = function() {
+      const response = fetch.apply(this, arguments);
+      response.then(res => {
+        if (`${window.location.origin}/cart/add.js`
+        	.includes(res.url)) {
+          	addedToCart()
+        }
+      });
+      return response
+    }
+  }(window, window.fetch));
+  var klAjax = true;
+  var atcButtons = document.querySelectorAll("form[action*='/cart/add'] button[type='submit']");
+  for (var i = 0; i < atcButtons.length; i++) {
+      atcButtons[i].addEventListener("click", function() {
+        if (klAjax) {
+          _learnq.push(['track', 'Added to Cart', item]);
+          klAjax = false;
+        }
+      })
+  }
+  
+  });
+  </script>
+  {% endif %}
+{%  if product.template_suffix == 'katool-warehouse-pickup' %}
+<script>
+  window.addEventListener('load', function() {
+   const selectedRadio = document.querySelector('.options-selection__option-value-input:checked');
+            const dpoopt = document.querySelector('.dpo-container');
+            if (selectedRadio && dpoopt) {
+              setTimeout(function(){
+                if (selectedRadio.value === 'Warehouse Pickup') {
+                    document.querySelector('.dpo-container').style.display = 'block';
+                    document.querySelector('.dpo-container').style.visibility = 'visible';
+                } else {
+                    document.querySelector('.dpo-container').style.display = 'none';
+                    document.querySelector('.dpo-container').style.visibility = 'hidden';
+                }
+              },1000);
+            }
+  });
+  </script>
+{% endif %}
+          <!-- Stamped -->
+
+<script>function myInit(){ StampedFn.init({ 
+apiKey: '434680a8-84d0-45b7-88db-43b94738aea9', 
+sId: '319738' }); }</script>
+
+
+<script async onload="myInit()" type="text/javascript" src="
+https://cdn1.stamped.io/files/widget.min.js
+"></script>
+
+<!-- End Stamped -->
+
+
+     <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+          
+          
+        function nostoSliderHeight() {
+          var flickityViewport = $('.product-recommendations--container .flickity-viewport');
+          const nostoheight = document.querySelector('.product-recommendations--container .flickity-slider')?.clientHeight;
+          flickityViewport.css('height', `${nostoheight}px`);
+        }
+         nostoSliderHeight();
+        setTimeout(function(){
+           nostoSliderHeight();
+        },2000);
+
+     
+        document.querySelectorAll('.options-selection__option-value-input').forEach(function (radio) {
+          radio.addEventListener('change', function () {
+                const dpoopst = document.querySelector('.dpo-container');
+                {%  if product.template_suffix == 'katool-warehouse-pickup' %}
+                  if(dpoopst){
+                  
+                    if(radio.value == 'Warehouse Pickup'){
+                        document.querySelector('.dpo-container').style.display = 'block';
+                        document.querySelector('.dpo-container').style.visibility = 'visible';
+                    }else{
+                      document.querySelector('.dpo-container').style.display = 'none';
+                      document.querySelector('.dpo-container').style.visibility = 'hidden';
+                    }
+                  }
+                  {% endif %}
+                const basePriceElementt = document.querySelector('.price__current .money');
+                if(basePriceElementt){
+                   var currentPricee = parseFloat(basePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+                }else{
+                  var currentPricee = 0;
+                }
+               
+
+                const salePriceElementt = document.querySelector('.price__compare-at .money');
+                let currentsalePricee = parseFloat(salePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+
+                const savePriceElementt = document.querySelector('.product__badge  .money');
+                let currentsavePricee = parseFloat(savePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+
+                var badgepricee = currentsalePricee - currentPricee;
+                currentsavePricee = badgepricee;
+                savePriceElementt.textContent = `($${currentsavePricee.toFixed(2)})`;
+            });
+          });
+           document.querySelectorAll('.options-selection__option-value-input').forEach(function (radio) {
+          
+                
+                const basePriceElementt = document.querySelector('.price__current .money');
+                if(basePriceElementt){
+                  var currentPricee = parseFloat(basePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+                }else{
+                  var currentPricee = 0;
+                }
+                
+
+                const salePriceElementt = document.querySelector('.price__compare-at .money');
+                let currentsalePricee = parseFloat(salePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+
+                const savePriceElementt = document.querySelector('.product__badge  .money');
+                let currentsavePricee = parseFloat(savePriceElementt.textContent.replace('$', '').replace(',', '')) || 0;
+
+                var badgepricee = currentsalePricee - currentPricee;
+                currentsavePricee = badgepricee;
+                savePriceElementt.textContent = `($${currentsavePricee.toFixed(2)})`;
+            
+          });
+ 
+          document.querySelector('.site-header-menu-toggle').addEventListener('click', function () {
+              if (window.innerWidth > 1023 && window.innerWidth <= 1300) {
+                  document.querySelectorAll('.navmenu-submenu.navmenu-meganav').forEach(function (element) {
+                      element.setAttribute('data-accordion-state', 'closed');
+                  });
+                  document.querySelectorAll('.navmenu-item').forEach(function(item) {
+                      item.addEventListener('click', function() {
+                          const submenu = item.querySelector('.navmenu-submenu');
+                          const anchor = item.querySelector('.navmenu-link.navmenu-link-parent.mdc-ripple-surface.mdc-ripple-upgraded');
+                  
+                          if (submenu) {
+                              const currentState = submenu.getAttribute('data-accordion-state');
+                              if (currentState === 'closed') {
+                                  submenu.setAttribute('data-accordion-state', 'open');
+                                  anchor.classList.add('navmenu-link-parent-active');
+                              } else {
+                                  submenu.setAttribute('data-accordion-state', 'closed');
+                                  anchor.classList.remove('navmenu-link-parent-active');
+                              }
+                          }
+                      });
+                  });
+  
+                  const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+                  const mainmobileclass = document.querySelector('.site-mobile-nav');
+                  mobileNavPanel.classList.add('allow-scroll-while-locked');
+                  mobileNavPanel.setAttribute('data-animation-state', 'open');
+                  mainmobileclass.setAttribute('data-open', 'true');
+              }
+          });
+          
+          document.querySelector('.mobile-nav-close').addEventListener('click', function () {
+              if (window.innerWidth > 1023 && window.innerWidth <= 1300) {
+                  const mobileNavPanel = document.querySelector('.mobile-nav-panel');
+                  const mainmobileclass = document.querySelector('.site-mobile-nav');
+                  mobileNavPanel.classList.remove('allow-scroll-while-locked');
+                  mainmobileclass.setAttribute('data-open', 'false');
+              }
+          });
+          
+       });
+      </script>
+</body>
+</html> 

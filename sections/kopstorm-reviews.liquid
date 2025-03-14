@@ -1,0 +1,382 @@
+{% schema %}
+{
+  "name": "Product Reviews",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Review Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product Reviews"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Customer Reviews"
+    },
+    {
+  "type": "url",
+  "id": "contact_button_link",
+  "label": "Button link"
+},
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Review Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Review Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Review Content",
+          "default": "<p>Share your thoughts about the product.</p>"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Review Date"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews",
+      "blocks": [
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="section-reviews" 
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="container">
+    <div class="review-header">
+      <h2 class="review-title">{{ section.settings.title }}</h2>
+      <p class="review-subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="review-slider-container">
+      <div class="review-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <div class="review-card" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                <div class="review-image-wrapper">
+                  {{ block.settings.image | image_url: width: 600 | image_tag: 
+                    loading: 'lazy',
+                    class: 'review-image'
+                  }}
+                </div>
+              {% endif %}
+
+              <div class="review-content">
+                <h4 class="review-card-title">{{ block.settings.title }}</h4>
+                <div class="review-meta">
+                  <span class="review-author">{{ block.settings.author }}</span>
+                  <span class="review-date">{{ block.settings.date | date: "%B %d, %Y" }}</span>
+                  {% if block.settings.verified %}
+                    <span class="verified-badge">✓ Verified Purchase</span>
+                  {% endif %}
+                </div>
+                <div class="review-text">
+                  {{ block.settings.content }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <div class="slider-controls">
+        <button class="slider-button prev" aria-label="Previous slides">←</button>
+        <button class="slider-button next" aria-label="Next slides">→</button>
+      </div>
+    </div>
+
+    <div class="button-wrap">
+      <a href="{{ section.settings.contact_button_link }}" class="button-primary">Read all the reviews</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.section-reviews {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.review-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.review-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.review-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #1a1a1a;
+}
+
+.review-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  transition: transform 0.3s ease;
+}
+
+.review-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ebebeb;
+    transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+}
+
+.review-image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.review-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-content {
+  padding: 20px;
+}
+
+.review-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #1a1a1a;
+}
+
+.review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #666;
+}
+
+.verified-badge {
+  color: #3c9342;
+  font-weight: 500;
+}
+
+.slider-controls {
+  display: none;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.slider-button {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.slider-button:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  .review-slider-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .review-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .review-grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .review-card {
+    flex: 0 0 calc(50% - 8px);
+    scroll-snap-align: start;
+  }
+  
+  .slider-controls {
+    display: flex;
+  }
+  
+  .review-title {
+    font-size: 24px;
+  }
+  
+  .review-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-card {
+    flex: 0 0 calc(50% - 8px);
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderContainer = document.querySelector('.review-slider-container');
+  const slider = document.querySelector('.review-grid');
+  const prevButton = document.querySelector('.slider-button.prev');
+  const nextButton = document.querySelector('.slider-button.next');
+  
+  if (!sliderContainer || !slider || !prevButton || !nextButton) return;
+  
+  const slideWidth = slider.querySelector('.review-card')?.offsetWidth || 0;
+  const gap = 16; // Same as gap in CSS
+  
+  // Set initial button states
+  updateButtonStates();
+  
+  function slide(direction) {
+    const maxScroll = slider.scrollWidth - slider.offsetWidth;
+    const scrollAmount = (slideWidth + gap) * (direction === 'next' ? 1 : -1);
+    
+    // Calculate new scroll position
+    const newScrollPosition = slider.scrollLeft + scrollAmount;
+    
+    // Check boundaries
+    if (direction === 'prev' && newScrollPosition < 0) {
+      slider.scrollTo({ left: 0, behavior: 'smooth' });
+    } else if (direction === 'next' && newScrollPosition > maxScroll) {
+      slider.scrollTo({ left: maxScroll, behavior: 'smooth' });
+    } else {
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+    
+    // Update buttons after scrolling
+    setTimeout(updateButtonStates, 300);
+  }
+  
+  function updateButtonStates() {
+    const isAtStart = slider.scrollLeft <= 5; // Small threshold for browser precision issues
+    const isAtEnd = Math.abs(slider.scrollLeft + slider.offsetWidth - slider.scrollWidth) < 5;
+    
+    // Disable/enable buttons
+    prevButton.disabled = isAtStart;
+    nextButton.disabled = isAtEnd;
+    
+    // Visual feedback
+    prevButton.style.opacity = isAtStart ? '0.3' : '1';
+    prevButton.style.cursor = isAtStart ? 'default' : 'pointer';
+    
+    nextButton.style.opacity = isAtEnd ? '0.3' : '1';
+    nextButton.style.cursor = isAtEnd ? 'default' : 'pointer';
+  }
+  
+  prevButton.addEventListener('click', () => slide('prev'));
+  nextButton.addEventListener('click', () => slide('next'));
+  
+  // Update button states when scrolling manually
+  slider.addEventListener('scroll', updateButtonStates);
+  
+  // Update when window resizes
+  window.addEventListener('resize', updateButtonStates);
+});
+</script>
+

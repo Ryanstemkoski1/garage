@@ -1,0 +1,10 @@
+<div class="product-accessories">
+  {% if product.metafields %}
+    {% if product.metafields.custom.product_accessories.value %}
+      {% for add_product in product.metafields.custom.product_accessories.value %}
+        Product Name : {{ add_product.title }}<br>
+        
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+</div>

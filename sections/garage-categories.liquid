@@ -1,0 +1,381 @@
+<style>
+  
+.g-cate{{ section.id }} {
+  padding-top: {{ section.settings.padding-top-desktop }}px!important;
+  padding-bottom: {{ section.settings.padding-bottom-desktop }}px!important;
+}
+  
+  .g-cate{{ section.id }} .page-content{max-width:1450px;}
+  .g-cate{{ section.id }} .g-cate-top{
+    display: block;
+    text-align: {{ section.settings.alignment }};
+}
+.g-cate{{ section.id }}  .g-cate-tab-list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16px;
+    width: 100%;
+}
+.g-cate{{ section.id }} .g-cate-tab-list .g-cate-tab-inner {
+    background-color: #000;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    height: 190px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 6px 6px 0px 0px;
+    align-content: center;
+    position: relative;
+}
+.g-cate{{ section.id }} .g-cate-tab-list .g-cate-tab-inner:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: #000;
+  bottom: 0px;
+  left: 0px;
+  transition: 0.5s all;
+  opacity: 0;
+}
+.g-cate{{ section.id }} .g-cate-tab-list .active .g-cate-tab-inner:before {
+  opacity: 1;
+}
+.g-cate{{ section.id }} .g-cate-tab-item {
+    width: calc(17% - 18px);
+}
+.g-cate{{ section.id }} .block-tab-title {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 14px;
+}
+.g-cate{{ section.id }} .block-tab-icon {
+    display: flex;
+    max-width: 70px;
+    width: 100%;
+    height: 70px;
+    justify-content: center;
+}
+.g-cate{{ section.id }} .block-tab-img img {
+   max-width: 100%;
+   display:block;
+}
+.g-cate{{ section.id }} .block-tab-img .image__overlay {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+}  
+.g-cate-data-item {
+    width: 100%;
+    position: relative;
+    display:none;
+}
+ .g-cate-data-item.active {display:block;} 
+
+.g-cate-data-item .block-tab-btn {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    right: 0px;
+    bottom: 0;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.g-cate-data-item .block-tab-btn .c-tab-btn {
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    border: #fff 1px solid;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.875rem 1.75rem;
+    text-transform: uppercase;
+    background-color: transparent;
+    transition: width 125ms cubic-bezier(0.4, 0, 0.2, 1), height 125ms cubic-bezier(0.4, 0, 0.2, 1), border-color 125ms cubic-bezier(0.4, 0, 0.2, 1), background-color 125ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 125ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.g-cate-data-item .block-tab-btn .c-tab-btn:hover {
+    background-color: #fff;
+    color: #333;
+}
+@media(max-width:1024px) {
+  .g-cate-data-item .block-tab-btn .c-tab-btn { padding: 0.75rem 1.125rem; }
+}
+@media(max-width:768px) {
+  .g-cate{{ section.id }} .block-tab-icon{height:50px;}
+  .g-cate-tab-list::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);background-color: #F5F5F5;}
+  .g-cate-tab-list::-webkit-scrollbar {height: 3px;background-color: #F5F5F5;}
+  .g-cate-tab-list::-webkit-scrollbar-thumb {background-color: #000000;}
+  .g-cate{{ section.id }} .block-tab-title{font-size: 16px;}
+  .g-cate{{ section.id }} .g-cate-tab-list .g-cate-tab-inner{height:130px;}
+  .g-cate{{ section.id }} .g-cate-tab-item{    min-width: 120px;}
+  .g-cate{{ section.id }}  .g-cate-tab-list{overflow: auto;padding-bottom:5px;margin-bottom:5px;flex-wrap: nowrap;}
+  .g-cate-data-item .block-tab-btn .c-tab-btn { padding: 0.625rem 1rem; }
+}
+
+
+
+@media screen and (max-width: 767px) {
+.g-cate{{ section.id }} {
+  padding-bottom: {{ section.settings.padding-bottom-mobile }}px!important;
+  padding-top: {{ section.settings.padding-top-mobile }}px!important;
+}
+
+  
+</style>
+<section class="g-cate{{ section.id }}">
+  <div>
+    <div class="g-cate-top">
+      <div class="page-content">
+      {% if section.settings.title != blank %}
+        <h2 class="g-cate-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+          <div class="g-cate-desc">{{ section.settings.description }}</div>
+      {% endif %}
+      </div>
+    </div>
+<div class="page-content">
+    <div class="g-cate-list">
+      <div class="g-cate-tab-list">
+     {% for block in section.blocks %}  
+    {% case block.type %}
+  
+      {% when 'item' %} 
+  {% assign collection = block.settings.collection %}
+
+          <a style="text-decoration: none;" href="{{ collection.url }}" class="g-cate-tab-item g-cate-{{ block.id }}" data-tab="{{ block.settings.title | downcase | replace:' ','-' }}">
+            <div class="g-cate-tab-inner">
+            {% if block.settings.tab_icon != blank %}
+              <span class="block-tab-icon">
+                <img src="{{ block.settings.tab_icon | img_url:'master' }}" alt="{{ block.settings.title }}" width="40" height="40">
+              </span>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <span class="block-tab-title">{{ block.settings.title }}
+                <p class="subblock">Contains {{ collection.all_products_count }} products</p>
+              </span>
+            {% endif %}
+           </div>
+          </a>
+         {% endcase %} 
+  {% endfor %}
+      </div>
+   <div style="display: none!important;" class="g-cate-data-list">
+     {% for block in section.blocks %}
+
+       <div class="g-cate-data-item g-cate-data-{{ block.id }}" data-id="{{ block.settings.title | downcase | replace:' ','-' }}">
+        {% if block.settings.image != blank %}
+           <span class="block-tab-img">
+            <img src="{{ block.settings.image | img_url:'master' }}" alt="{{ block.settings.title }}" width="1400" height="590">
+             {%- if block.settings.show_overlay -%}
+              <div class="image__overlay"
+                style="{% if block.settings.overlay_color != blank %}
+                    background-color: {{ block.settings.overlay_color }};
+                  {% endif %}
+                  opacity: {{ block.settings.overlay_opacity | default: 100 | times: 0.01 }};"
+              ></div>
+              {%- endif -%}
+            </span>
+            {% endif %}
+           {% if block.settings.button_label != blank %}
+           <div class="block-tab-btn">
+              <a href="{{ block.settings.button_link }}" class="c-tab-btn">{{ block.settings.button_label }}</a>
+           </div>
+           {% endif %}  
+       </div>
+      {% endfor %}  
+     </div>
+    </div>
+    </div>
+  </div>
+</section>
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+  // Set the first tab and data item as active
+  document.querySelector('.g-cate-data-list .g-cate-data-item:first-child').classList.add('active');
+  document.querySelector('.g-cate-tab-list .g-cate-tab-item:first-child').classList.add('active');
+
+  const tabItems = document.querySelectorAll('.g-cate-tab-list .g-cate-tab-item');
+  const tabDataItems = document.querySelectorAll('.g-cate-data-list .g-cate-data-item');
+
+  tabItems.forEach(item => {
+    item.addEventListener('click', e => {
+      // Remove 'active' class from all data items
+      tabItems.forEach(item => item.classList.remove('active'));
+
+      // Add 'active' class to the clicked data item
+      const clickedItem = e.currentTarget; // Ensure the correct element is targeted
+      clickedItem.classList.add('active');
+
+      // Remove 'active' class from all tab items
+      tabDataItems.forEach(dItem => dItem.classList.remove('active'));
+
+      // Add 'active' class to the corresponding tab item
+      const dataTab = clickedItem.getAttribute('data-tab');
+      console.log('dataTab', dataTab)
+      const correspondingTab = document.querySelector(`.g-cate-data-item[data-id="${dataTab}"]`);
+      if (correspondingTab) {
+        correspondingTab.classList.add('active');
+      }
+    });
+  });
+});
+
+</script>
+{% schema %}
+  {
+    "name": "Garage Categories",
+    "settings": [
+      {
+"type": "range",
+"id": "padding-top-desktop",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing top desktop",
+"default": 50
+},
+{
+"type": "range",
+"id": "padding-bottom-desktop",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing bottom desktop",
+"default": 50
+},
+{
+"type": "range",
+"id": "padding-top-mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing top mobile",
+"default": 50
+},
+{
+"type": "range",
+"id": "padding-bottom-mobile",
+"min": 0,
+"max": 100,
+"step": 5,
+"unit": "px",
+"label": "Spacing bottom mobile",
+"default": 50
+}
+,
+      {
+          "type": "text",
+          "id": "title", 
+          "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+    },
+
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+          {
+              "label": "left",
+              "value": "left"
+          },
+          {
+              "label": "center",
+              "value": "center"
+          },
+          {
+              "label": "right",
+              "value": "right"
+          }
+      ]
+    }
+    ],
+    "blocks": [
+      {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "tab_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Image dimension : 1400px X 565px"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "id": "show_overlay",
+          "type": "checkbox",
+          "label": "t:sections.slideshow.blocks.slide.show_overlay.label",
+          "default": true
+        },
+        {
+          "id": "overlay_color",
+          "type": "color",
+          "label": "t:sections.slideshow.blocks.slide.overlay_color.label",
+          "default": "#000000"
+        },
+        {
+          "id": "overlay_opacity",
+          "type": "range",
+          "label": "t:sections.slideshow.blocks.slide.overlay_opacity.label",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        }
+      ]
+    }
+
+    ],
+    "presets": [
+      {
+        "name": "Garage Categories"
+      }
+    ]
+  }
+{% endschema %}

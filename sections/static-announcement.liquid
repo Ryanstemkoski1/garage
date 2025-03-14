@@ -1,0 +1,310 @@
+<style>
+  .a-bar-left {
+  display: flex;
+  flex-flow: row wrap;
+  font-weight: normal;
+  padding: 3px 0px;
+}
+
+.a-bar-left .custom-announcement-text {
+  font-size: 16px;
+  line-height: normal;
+  margin-right: 15px;
+  font-weight: 600;
+}
+
+.a-bar-left div#countdown {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  top: 2px;
+}
+
+.a-bar-left div#countdown .count-item {
+  font-size: 12px;
+  line-height: normal;
+  margin: 0px 5px;
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  justify-content: center;
+  align-items: flex-start;
+  text-transform: uppercase;
+  color: #ff0000;
+  position: relative;
+  font-weight: 600;
+}
+.a-bar-left div#countdown .count-item span {
+  display: block;
+  width: 100%;
+  line-height: 1;
+  font-size: 15px;
+  min-height:15px;
+  color: #ffffff;
+}
+
+.a-bar-left div#countdown .count-item:after {
+    content: ':';
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    color: #fff;
+}
+
+.a-bar-left div#countdown .count-item:last-child:after {
+  content: normal;
+}
+
+@media (max-width: 767px) {
+  .a-bar-left .custom-announcement-text {
+    font-size: 14px;
+    margin-right: 12px;
+    font-weight: 600;
+}
+  .a-bar-left div#countdown .count-item span {
+    line-height: 1;
+    font-size: 12px;
+    min-height: 12px;
+}
+.a-bar-left div#countdown .count-item {
+    font-size: 10px;
+    line-height: normal;
+    margin: 0px 2px;
+    font-weight: 600;
+}  
+  .a-bar-left div#countdown .count-item:after {
+    right: -7px;
+}
+}
+  
+</style>
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="static-announcement">
+</script>
+
+{% assign show_everywhere = false %}
+{% assign homepage_only = false %}
+
+{% if
+  section.settings.show_announcement and
+  section.settings.homepage_announcement == false
+%}
+  {% assign show_everywhere = true %}
+{% endif %}
+
+{% if
+  section.settings.show_announcement and
+  section.settings.homepage_announcement and
+  template == 'index'
+%}
+  {% assign homepage_only = true %}
+{% endif %}
+
+{% if show_everywhere or homepage_only %}
+    <div
+      class="
+        announcement-bar
+        {% if section.settings.announcement_text == blank and section.settings.announcement_text_mobile != blank %}
+          only-mobile
+        {% endif %}
+      "
+      style="
+        margin-bottom: -1px;
+        color: {{ section.settings.announcement_color }};
+        background: {{ section.settings.announcement_background }};
+      ">
+      <div class="announcment-bar">
+        <div class="a-bar-left">
+          <div class="custom-announcement-text">
+            Black Friday Sale Ends in
+          </div>
+          <div id="countdown">
+          <div class="count-item"> <span id="days"></span> Days</div> 
+          <div class="count-item"><span id="hours"></span> Hrs </div>
+         <div class="count-item"> <span id="minutes"></span> Mins </div>
+          <div class="count-item"><span id="seconds"></span> Secs</div>
+        </div>
+
+       {% comment %}
+         
+          {% if section.settings.shipping_icon_1 or section.settings.shiiping_text_1 != blank %} 
+            <div class="ann-ctn">
+              {% if section.settings.shipping_icon_1 != blank %} 
+                <div class="svg-icon"><img src="{{ section.settings.shipping_icon_1 | img_url:'master' }}"></div>
+              {% endif %}
+              {% if section.settings.shiiping_text_1 != blank %}
+                <div class="svg-text">{{ section.settings.shiiping_text_1 }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if section.settings.shipping_icon_2 or section.settings.shiiping_text_2 != blank %} 
+            <div class="ann-ctn">
+              {% if section.settings.shipping_icon_2 != blank %} 
+                <div class="svg-icon"><img src="{{ section.settings.shipping_icon_2 | img_url:"master"}}"></div>
+              {% endif %}
+              {% if section.settings.shiiping_text_2 != blank %}
+                <div class="svg-text">{{ section.settings.shiiping_text_2 }}</div>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if section.settings.shipping_icon_3 or section.settings.shiiping_text_3 != blank %} 
+            <div class="ann-ctn">
+              {% if section.settings.shipping_icon_2 != blank %} 
+                <div class="svg-icon"><img src="{{ section.settings.shipping_icon_3 | img_url:"master"}}"></div>
+              {% endif %}
+              {% if section.settings.shiiping_text_2 != blank %}
+                <div class="svg-text">{{ section.settings.shiiping_text_3 }}</div>
+              {% endif %}
+            </div>
+          {% endif %}{% endcomment %}
+        </div>
+        {% if section.settings.contact_icon or section.settings.contact_text != blank %} 
+        <div class="a-bar-center">
+          <div class="ann-ctn">
+            {% if section.settings.contact_icon != blank %} 
+              <div class="svg-icon"><img src="{{ section.settings.contact_icon | img_url:"master"}}"></div>
+            {% endif %}
+            {% if section.settings.contact_text != blank %}
+              <div class="svg-text"><a href="tel:{{ section.settings.contact_text }}">{{ section.settings.contact_text }}</a></div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.email_icon or section.settings.email_text  != blank %} 
+        <div class="a-bar-right">
+          <div class="ann-ctn">
+            {% if section.settings.email_icon != blank %} 
+              <div class="svg-icon"><img src="{{ section.settings.email_icon | img_url:"master" }}"></div>
+            {% endif %}
+            {% if section.settings.email_text != blank %}
+              <div class="svg-text"><a href="mailto:{{ section.settings.email_text }}">{{ section.settings.email_text }}</a></div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+  </div>
+{% endif %}
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+  // Set the target date (December 2, 2024)
+  const targetDate = new Date("December 2, 2024 23:59:59").getTime();
+
+  // Function to calculate and update the timer
+  function updateTimer() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    if (timeLeft >= 0) {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000).toString().padStart(2, '0');
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    } else {
+      clearInterval(timerInterval);
+      document.getElementById("countdown").innerHTML = "Countdown has ended!";
+    }
+  }
+
+  // Run the updateTimer function immediately
+  updateTimer();
+
+  // Then set an interval to update every second
+  const timerInterval = setInterval(updateTimer, 1000);
+});
+
+
+</script>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "site-announcement",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement"
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_announcement",
+      "label": "Show on home page only"
+    },
+    {
+      "type": "image_picker",
+      "id": "shipping_icon_1",
+      "label": "Icon Image 1"
+    },
+    {
+      "type": "text",
+      "id": "shiiping_text_1",
+      "label": "Icon Text 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "shipping_icon_2",
+      "label": "Icon Image 2"
+    },
+    {
+      "type": "text",
+      "id": "shiiping_text_2",
+      "label": "Icon Text 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "shipping_icon_3",
+      "label": "Icon Image 3"
+    },
+    {
+      "type": "text",
+      "id": "shiiping_text_3",
+      "label": "Icon Text 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_icon",
+      "label": "Contact No Icon"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Contact Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "email_icon",
+      "label": "Email No Icon"
+    },
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email Text"
+    },
+    {
+      "id": "announcement_color",
+      "type": "color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "id": "announcement_background",
+      "type": "color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ]
+}
+
+{% endschema %}

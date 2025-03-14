@@ -1,0 +1,12 @@
+<template data-html="list">
+  {% render 'cart-item-list' %}
+</template>
+
+<template data-html="cart_total">
+  <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total" style="display:none !important;"></span>
+  {{- cart.total_price | money -}}
+</template>
+
+<template data-html="discounts">
+  {% render 'cart-discounts' %}
+</template>

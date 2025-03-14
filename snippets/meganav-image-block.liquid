@@ -1,0 +1,86 @@
+{% assign image = 'image_' | append: id %}
+{% assign text = 'text_' | append: id %}
+{% assign url = 'link_' | append: id %}
+{% assign position = 'position_' | append: id %}
+{% assign size = 'size_' | append: id %}
+{% assign text_label = 'img_text' %}
+
+{% assign image = settings[image] %}
+{% assign text = settings[text] %}
+{% assign url = settings[url] %}
+{% assign position = settings[position] %}
+{% assign size = settings[size] %}
+{% assign text_label = settings[text_label] %}
+
+{% if image != blank %}
+  <div
+    class="
+      navmenu-meganav-standard__image-container
+      navmenu-meganav-standard__image-{{ position }}
+    "
+  >
+    <div class="image-text-block">
+    {% if url %}
+      <a class="navmenu-meganav-standard__image-link" href="{{ url }}">
+    {% endif %}
+      {% capture image_classes %}
+        navmenu-meganav-standard__image
+        navmenu-meganav-standard__image-size-{{ size }}
+      {% endcapture %}
+      {% if size == 'small' %}
+        {% assign image_width = '600x' %}
+      {% elsif size == 'medium' %}
+        {% assign image_width = '600x' %}
+      {% else %}
+        {% assign image_width = '600x' %}
+      {% endif %}
+      <div class="navmenu-meganav-standard__image-wrapper">
+        {%
+          render 'rimg',
+          img: image,
+          class: image_classes,
+          size: image_width,
+          alt: text,
+          focal_point: image.presentation.focal_point,
+        %}
+      </div>
+    {% if url %}
+      </a>
+    {% endif %}
+
+    {% if text_label != blank %}
+      <p
+        class="
+          navmenu-meganav-standard__image-text
+          navmenu-meganav-standard__image-text--{{ size }}
+        "
+      >
+        
+        {% if url %}
+          <a class="navmenu-meganav-standard__image-link"  href="{{ url }}">
+        {% endif %}
+          {{ text_label | escape }}
+        {% if url %}
+          </a>
+        {% endif %}
+      </p>
+    {% endif %}
+    {% if text != blank %}
+      <p
+        class="
+          navmenu-meganav-standard__image-text
+          navmenu-meganav-standard__image-text--{{ size }}
+        "
+      >
+        {% if url %}
+          <a class="navmenu-meganav-standard__image-link button-link " href="{{ url }}">
+        {% endif %}
+          {{ text | escape }}
+        {% if url %}
+          </a>
+        {% endif %}
+      </p>
+    {% endif %}
+      </div>
+  </div>
+{% endif %}

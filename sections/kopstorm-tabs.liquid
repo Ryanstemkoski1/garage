@@ -1,0 +1,330 @@
+<style>
+  /* Brand-aligned styles while maintaining original structure */
+  .brands {
+
+
+
+    background: white;
+  }
+
+  .brands-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+     
+    letter-spacing: -0.02em;
+  }
+
+  .quick-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    padding: 16px;
+    background: white;
+    border: 1px solid #e5e5e5;
+  }
+
+  .filter-chip {
+    padding: 8px 20px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    font-weight: 600;
+
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+     
+    letter-spacing: 0.02em;
+  }
+
+  .filter-chip:hover {
+    border-color: #000;
+    color: #000;
+  }
+
+  .filter-chip.active {
+    background: #000;
+    border-color: #000;
+    color: white;
+  }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .brand-card {
+    border: 1px solid #e5e5e5;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+    background: white;    color: #000000;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .brand-card:hover {
+    border-color: #000000;
+  }
+
+  .brand-logo {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .brand-info {
+    flex: 1;
+  }
+
+  .brand-name {
+    font-size: 15px;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+  }
+
+  .brand-category {
+    font-size: 13px;
+
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .brand-category::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #C2442B;
+  }
+
+  .featured {
+    position: relative;
+  }
+
+  .featured::after {
+    content: "Featured";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px 12px;
+    background: #C2442B;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+     
+  }
+
+  @media (max-width: 768px) {
+    .brands-title {
+      font-size: 28px;
+    }
+
+    .filter-chip {
+      padding: 6px 16px;
+      font-size: 13px;
+    }
+
+    .brand-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<!-- Original HTML structure remains exactly the same -->
+<section style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  " class="brands">
+  <div class="container">
+  <h2 class="brands-title">{{ section.settings.section_title | escape }}</h2>
+
+  <div class="quick-filters">
+    <button type="button" class="filter-chip active" data-filter="all">
+      All Brands
+    </button>
+    {% assign quick_filters = section.blocks | where: "type", "quick_filter" %}
+    {% if quick_filters.size > 0 %}
+      {% for block in quick_filters %}
+        {% assign filter_val = block.settings.filter_value | downcase %}
+        {% if filter_val != "all" %}
+          <button type="button"
+                  class="filter-chip"
+                  data-filter="{{ block.settings.filter_value | escape }}">
+            {{ block.settings.filter_text | escape }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% assign brand_cards = section.blocks | where: "type", "brand_card" %}
+  {% if brand_cards.size > 0 %}
+    <div class="brands-grid">
+      {% for block in brand_cards %}
+        <a href="{{ block.settings.brand_link | escape }}"
+           class="brand-card {% if block.settings.featured %}featured{% endif %}"
+           data-filter="{{ block.settings.filter_tag | escape }}">
+          {% if block.settings.brand_logo != blank %}
+            <img src="{{ block.settings.brand_logo | img_url: '500x500' }}"
+                 alt="{{ block.settings.brand_name | escape }}"
+                 class="brand-logo" loading="lazy">
+          {% else %}
+            <img src="{{ 'placeholder.svg' | asset_url }}"
+                 alt="{{ block.settings.brand_name | escape }}"
+                 class="brand-logo" loading="lazy">
+          {% endif %}
+          <div class="brand-info">
+            <div class="brand-name">{{ block.settings.brand_name | escape }}</div>
+            <div class="brand-category">{{ block.settings.brand_category | escape }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>{{ 'No brand cards have been added yet.' | t }}</p>
+  {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop Top Brands",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Shop Top Brands"
+    },
+            {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+  ],
+  "blocks": [
+    {
+      "type": "quick_filter",
+      "name": "Quick Filter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "filter_text",
+          "label": "Filter Text",
+          "default": "Lifts"
+        },
+        {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Filter Value (e.g., 'lifts', 'storage')",
+          "default": "lifts"
+        }
+      ]
+    },
+    {
+      "type": "brand_card",
+      "name": "Brand Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "AMGO Hydraulics"
+        },
+        {
+          "type": "text",
+          "id": "brand_category",
+          "label": "Brand Category",
+          "default": "Lifts & Hoists"
+        },
+        {
+          "type": "url",
+          "id": "brand_link",
+          "label": "Brand Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Brand",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "filter_tag",
+          "label": "Filter Tag (should match a Quick Filter's Filter Value)",
+          "default": "lifts"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Top Brands",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  var filterChips = document.querySelectorAll('.filter-chip');
+  var brandCards = document.querySelectorAll('.brand-card');
+
+  filterChips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var filterValue = this.getAttribute('data-filter');
+      
+      // Remove active class from all chips and then add to the clicked chip
+      filterChips.forEach(function(chip) {
+        chip.classList.remove('active');
+      });
+      this.classList.add('active');
+      
+      // If "all" is selected, show every card; otherwise, filter accordingly
+      brandCards.forEach(function(card) {
+        if (filterValue === 'all' || card.getAttribute('data-filter') === filterValue) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+{% endjavascript %}

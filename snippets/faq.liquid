@@ -1,0 +1,61 @@
+<div class="accordion_container-faq">
+    <div class="accordian-header-faq">
+      <h4>FAQ</h4>
+      <span class="faq-plus">+</span>
+      <span class="faq-minus hide">-</span>
+    </div> 
+
+    <!-- Accordion content -->
+    <div class="accordian-faq hide"> <!-- Initially hidden with 'hide' class -->
+      {% if product.metafields.global.faq_section != blank %}
+        {{ product.metafields.global.faq_section }}
+      {% endif %}
+    </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Add click event listener to the FAQ header to toggle content visibility
+    document.querySelector('.accordian-header-faq').addEventListener('click', function() {
+        const content = document.querySelector('.accordian-faq');
+        const plusIcon = this.querySelector('.faq-plus');
+        const minusIcon = this.querySelector('.faq-minus');
+
+        // Toggle the 'hide' class on the FAQ content
+        content.classList.toggle('hide'); 
+
+        // Toggle the plus and minus icons based on content visibility
+        if (content.classList.contains('hide')) {
+            plusIcon.style.display = 'inline'; // Show plus icon
+            minusIcon.style.display = 'none';  // Hide minus icon
+        } else {
+            plusIcon.style.display = 'none';   // Hide plus icon
+            minusIcon.style.display = 'inline'; // Show minus icon
+        }
+    });
+
+    const faqItems = document.querySelectorAll(".item");
+
+    faqItems.forEach(item => {
+      const title = item.querySelector(".FAQ-title");
+      const content = item.querySelector(".FAQ-content");
+      const toggle = item.querySelector(".expandToggle");
+
+      title.addEventListener("click", () => {
+        // Toggle the display of the FAQ content
+        content.classList.toggle("hide");
+
+        // Update the expand/collapse icon
+        if (content.classList.contains("hide")) {
+          toggle.textContent = "+";
+        } else {
+          toggle.textContent = "-";
+        }
+      });
+    });
+
+  });
+</script>
+{% style %}
+  .hide { display: none; }
+{% endstyle %}
