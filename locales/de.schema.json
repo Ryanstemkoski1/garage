@@ -329,13 +329,6 @@
             "label": "Nachrichteneingabe anzeigen"
           }
         },
-        "free_shipping": {
-          "label": {
-            "name": "Shipping Text",
-            "text":"This item qualifies for FREE SHIPPING."
-          },
-          "icon": "Shipping Icon"
-        },
         "share": {
           "name": "Teilen"
         },
