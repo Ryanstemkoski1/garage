@@ -31,6 +31,12 @@
             "show_gift_card_recipient_form": false
           }
         },
+        "free_shipping_EcF4Dj": {
+          "type": "free_shipping",
+          "settings": {
+            "free_shipping": "This item qualifies for FREE SHIPPING."
+          }
+        },
         "custom_liquid_pYGqXp": {
           "type": "custom-liquid",
           "settings": {
@@ -43,6 +49,7 @@
         "735aca69-2d1b-4a30-b82f-738a8cc7a0df",
         "price",
         "form",
+        "free_shipping_EcF4Dj",
         "custom_liquid_pYGqXp"
       ],
       "settings": {
