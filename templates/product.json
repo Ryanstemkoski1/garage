@@ -31,6 +31,12 @@
             "show_gift_card_recipient_form": false
           }
         },
+        "free_shipping_tqCtTt": {
+          "type": "free_shipping",
+          "settings": {
+            "free_shipping": "missing translation: \"t:sections.product.blocks.free_shipping.label.default\" is not present in any of the [\"en\"] schema locale files"
+          }
+        },
         "custom_liquid_pYGqXp": {
           "type": "custom-liquid",
           "settings": {
@@ -43,6 +49,7 @@
         "735aca69-2d1b-4a30-b82f-738a8cc7a0df",
         "price",
         "form",
+        "free_shipping_tqCtTt",
         "custom_liquid_pYGqXp"
       ],
       "settings": {
@@ -128,15 +135,6 @@
     },
     "1702401138e0216cf4": {
       "type": "apps",
-      "blocks": {
-        "3f2f28b5-f44a-465e-a459-57ef8960dcf4": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "3f2f28b5-f44a-465e-a459-57ef8960dcf4"
-      ],
       "settings": {
         "include_padding": true
       }
@@ -155,7 +153,6 @@
         "review_P96XjB": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Matt-Sieracki-Review.png",
             "title": "Heavy Duty + Ez Install",
             "content": "<p>I have five 4 post lifts, this one is the best out of all. Heavy duty, simple design, easy installation.</p>",
             "author": "Matt Sieracki",
@@ -166,7 +163,6 @@
         "review_hJ7BKc": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Vurchun-Review.jpg",
             "title": "Love this lift",
             "content": "<p>This lift allowed me turn my 3 car garage into a 4 car garage. I’m loving the ease of lifting and lowering ...</p>",
             "author": "Vurchun Risher",
@@ -177,7 +173,6 @@
         "review_JBaLbD": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Sara-Review.jpg",
             "title": "Super Lift",
             "content": "<p>The photo is my 10,000lb truck, it's high enough for me to walk under and not have to duck and I'm 5' 10\" ...</p>",
             "author": "Jerry C",
@@ -188,7 +183,6 @@
         "review_dfzKmy": {
           "type": "review",
           "settings": {
-            "image": "shopify://shop_images/81H3YHRF_AL.jpg",
             "title": "Hard to Beat",
             "content": "<p>After just a year of ownership I love the machines. So far they’ve stood behind these products and I am happy!</p>",
             "author": "Ethan Wilson",
