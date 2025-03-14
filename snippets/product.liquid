@@ -399,6 +399,17 @@
                       selected_variant: selected_variant,
                       is_product_modal: is_product_modal,
                     %}
+                  {% endunless %}
+                  {% if block.type == 'free_shipping' %}
+                    <div class="product_shipping">
+                      <img src="{{ block.settings.free_shipping_image | img_url:'50x50' }}" alt="{{ block.settings.free_shipping }}" width="40" height="40">
+      
+                      {% if block.settings.free_shipping != blank %}
+                        <p>{{ block.settings.free_shipping }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% unless onboarding %}
                     <div class="payment-div">
                       <div class="shop-payment"><form data-payment-terms-target style="display: none;"></form>
                       </div>
