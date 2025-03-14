@@ -34,7 +34,8 @@
         "free_shipping_EcF4Dj": {
           "type": "free_shipping",
           "settings": {
-            "free_shipping": "This item qualifies for FREE SHIPPING."
+            "free_shipping": "This item qualifies for FREE SHIPPING.",
+            "free_shipping_image": "shopify://shop_images/Group.svg"
           }
         },
         "custom_liquid_pYGqXp": {
