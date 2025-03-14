@@ -84,13 +84,6 @@
         "success": "Thanks for contacting us. We'll get back to you as soon as possible.",
         "submit": "Request Quote",
         "quantity": "Quantity"
-      },
-      "free_shipping": {
-        "label": {
-          "name": "Add your text",
-          "default": "This item qualifies for FREE SHIPPING."
-        },
-        "icon": "Upload a shipping icon image"
       }
     }
   },
