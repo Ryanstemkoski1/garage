@@ -28,12 +28,7 @@
           "type": "form",
           "settings": {
             "enable_local_pickup": true,
-            "show_gift_card_recipient_form": false
-          }
-        },
-        "free_shipping_EcF4Dj": {
-          "type": "free_shipping",
-          "settings": {
+            "show_gift_card_recipient_form": false,
             "free_shipping": "This item qualifies for FREE SHIPPING.",
             "free_shipping_image": "shopify://shop_images/Group.svg"
           }
@@ -50,7 +45,6 @@
         "735aca69-2d1b-4a30-b82f-738a8cc7a0df",
         "price",
         "form",
-        "free_shipping_EcF4Dj",
         "custom_liquid_pYGqXp"
       ],
       "settings": {
