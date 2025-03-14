@@ -196,7 +196,12 @@
           "enable_local_pickup": {
             "label": "Enable local pickup",
             "info": "Include availability indicator for local pickup. Disable to exclude information for location inventory. [Learn more](https://support.pixelunion.net/hc/en-us/articles/360056378914)"
-          }
+          },
+          "shipping": {
+            "name": "Shipping Text",
+            "text":"This item qualifies for FREE SHIPPING."
+          },
+          "shipping_icon": "Shipping Icon"
         },
         "complementary_products": {
           "name": "Complementary products",
@@ -328,13 +333,6 @@
           "message": {
             "label": "Show message input"
           }
-        },
-        "free_shipping": {
-          "label": {
-            "name": "Shipping Text",
-            "text":"This item qualifies for FREE SHIPPING."
-          },
-          "icon": "Shipping Icon"
         },
         "share": {
           "name": "Share"
