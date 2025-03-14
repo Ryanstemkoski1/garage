@@ -280,6 +280,17 @@
           "label": "t:sections.product.blocks.form.show_gift_card_recipient_form.label",
           "info": "t:sections.product.blocks.form.show_gift_card_recipient_form.info",
           "default": false
+        },
+        {
+          "type": "text",
+          "id": "free_shipping",
+          "label": "t:sections.product.blocks.form.shipping.name",
+          "default": "t:sections.product.blocks.form.shipping.text"
+        },
+        {
+          "type": "image_picker",
+          "id": "free_shipping_image",
+          "label": "t:sections.product.blocks.form.shipping_icon"
         }
       ]
     },
@@ -638,24 +649,6 @@
           "id": "show_message",
           "label": "t:sections.product.blocks.request_quote.message.label",
           "default": true
-        }
-      ]
-    },
-    { 
-      "type": "free_shipping",
-      "name": "Free Shipping",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "free_shipping",
-          "label": "t:sections.product.blocks.free_shipping.label.name",
-          "default": "t:sections.product.blocks.free_shipping.label.text"
-        },
-        {
-          "type": "image_picker",
-          "id": "free_shipping_image",
-          "label": "t:sections.product.blocks.free_shipping.icon"
         }
       ]
     }
