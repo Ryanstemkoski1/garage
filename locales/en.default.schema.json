@@ -199,9 +199,11 @@
           },
           "shipping": {
             "name": "Shipping Text",
-            "text":"This item qualifies for FREE SHIPPING."
+            "text":"This item qualifies for FREE SHIPPING.",
+            "name_dynamic": "Shipping Text - Dynamic"
           },
-          "shipping_icon": "Shipping Icon"
+          "shipping_icon": "Shipping Icon",
+          "shipping_icon_dynamic": "Shipping Icon"
         },
         "complementary_products": {
           "name": "Complementary products",
