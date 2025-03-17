@@ -399,11 +399,7 @@
                       selected_variant: selected_variant,
                       is_product_modal: is_product_modal,
                     %}
-                    test- {{ product.metafields.custom.shipping_set_up   }}
-                    {% if product.metafields.custom.shipping_set_up %}
-                      {{ product.metafields.custom.shipping_set_up }}
-                    {% endif %}
-                    {%- if block.settings.free_shipping != blank or block.settings.free_shipping_dynamic != blank -%}
+                    {%- if product.metafields.custom.shipping_set_up and (block.settings.free_shipping != "" or block.settings.free_shipping_dynamic != "") -%}
                       <div class="product_shipping">
                         {%- if block.settings.free_shipping_image_dynamic != blank -%}
                           <img src="{{ block.settings.free_shipping_image_dynamic | img_url:'30x30' }}" alt="{{ block.settings.free_shipping }}" width="30" height="30">
