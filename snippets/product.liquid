@@ -399,20 +399,22 @@
                       selected_variant: selected_variant,
                       is_product_modal: is_product_modal,
                     %}
-                    {%- if product.metafields.custom.shipping_set_up and (block.settings.free_shipping != "" or block.settings.free_shipping_dynamic != "") -%}
-                      <div class="product_shipping">
-                        {%- if block.settings.free_shipping_image_dynamic != blank -%}
-                          <img src="{{ block.settings.free_shipping_image_dynamic | img_url:'30x30' }}" alt="{{ block.settings.free_shipping }}" width="30" height="30">
-                        {%- else -%}
-                        <img src="{{ block.settings.free_shipping_image | img_url:'30x30' }}" alt="{{ block.settings.free_shipping }}" width="30" height="30">
-                        {% endif %}
-
-                        {% if block.settings.free_shipping_dynamic != blank %}
-                          <p>{{ block.settings.free_shipping_dynamic }}</p>
-                        {%- else -%}
-                          <p>{{ block.settings.free_shipping }}</p>
-                        {% endif %}
-                      </div>
+                    {%- if product.metafields.custom.shipping_set_up -%}
+                      {%- if block.settings.free_shipping != blank or block.settings.free_shipping_dynamic != blank -%}
+                        <div class="product_shipping">
+                          {%- if block.settings.free_shipping_image_dynamic != blank -%}
+                            <img src="{{ block.settings.free_shipping_image_dynamic | img_url:'30x30' }}" alt="{{ block.settings.free_shipping }}" width="30" height="30">
+                          {%- else -%}
+                          <img src="{{ block.settings.free_shipping_image | img_url:'30x30' }}" alt="{{ block.settings.free_shipping }}" width="30" height="30">
+                          {% endif %}
+  
+                          {% if block.settings.free_shipping_dynamic != blank %}
+                            <p>{{ block.settings.free_shipping_dynamic }}</p>
+                          {%- else -%}
+                            <p>{{ block.settings.free_shipping }}</p>
+                          {% endif %}
+                        </div>
+                      {% endif %}
                     {% endif %}
                     <div class="payment-div">
                       <div class="shop-payment"><form data-payment-terms-target style="display: none;"></form>
