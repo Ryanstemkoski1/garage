@@ -399,7 +399,7 @@
                       selected_variant: selected_variant,
                       is_product_modal: is_product_modal,
                     %}
-                    {{ product.metafields.custom.custom.shipping_set_up.value }}
+                    test- {{ product.metafields.custom.custom.shipping_set_up.value }}
                     {%- if block.settings.free_shipping != blank or block.settings.free_shipping_dynamic != blank -%}
                       <div class="product_shipping">
                         {%- if block.settings.free_shipping_image_dynamic != blank -%}
