@@ -30,7 +30,9 @@
             "enable_local_pickup": true,
             "show_gift_card_recipient_form": false,
             "free_shipping": "This item qualifies for FREE SHIPPING.",
-            "free_shipping_image": "shopify://shop_images/Group.svg"
+            "free_shipping_dynamic": "{{ product.metafields.custom.shipping_setup.value.text.value }}",
+            "free_shipping_image": "shopify://shop_images/Group.svg",
+            "free_shipping_image_dynamic": "{{ product.metafields.custom.shipping_setup.value.icon.value }}"
           }
         },
         "custom_liquid_pYGqXp": {
