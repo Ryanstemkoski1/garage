@@ -400,7 +400,7 @@
                       is_product_modal: is_product_modal,
                     %}
                     test- {{ product.metafields.custom.shipping_set_up   }}
-                    {% if product.metafields.custom.shipping_set_up == true %}
+                    {% if product.metafields.custom.shipping_set_up %}
                       {{ product.metafields.custom.shipping_set_up }}
                     {% endif %}
                     {%- if block.settings.free_shipping != blank or block.settings.free_shipping_dynamic != blank -%}
